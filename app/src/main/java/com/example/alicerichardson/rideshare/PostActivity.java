@@ -14,6 +14,8 @@ import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Date;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Created by adaschnake on 11/11/17.
@@ -31,7 +33,7 @@ public class PostActivity extends AppCompatActivity {
     CheckBox smoking;
     CheckBox food;
     CheckBox money;
-    HashMap ridesMap;
+    HashMap<String, TreeSet> ridesMap;
     DatePicker datePicker;
     TimePicker timePicker;
     EditText timeText;
@@ -77,18 +79,23 @@ public class PostActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
-<<<<<<< Updated upstream
-=======
     public void createNewRide()
     {
         //get info from spinners, date/time, check boxes
         results = getSpinnerResultsArray();
         int numSeats = Integer.parseInt(seats.getText().toString());
-        int time = timeText.getText().toString();
+        String time = timeText.getText().toString();
         //create new ride and add to
-        ridesMap.put(results[1], new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
-        //return to home screen?
-        //or success message
+        // if destination is not yet in map
+        if (ridesMap.containsKey(results[1])) {
+            // add it to map with a new (empty) tree
+            ridesMap.put(results[1], new TreeSet<Ride>());
+        }
+        // add ride to corresponding tree
+        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
+        //show success toast
+
+        //return to home screen
     }
 
     private String[] getSpinnerResultsArray()
@@ -115,7 +122,4 @@ public class PostActivity extends AppCompatActivity {
 //    {
 //        return timePicker.getHour() + ";" + timePicker.getMinute();
 //    }
-
-
->>>>>>> Stashed changes
 }

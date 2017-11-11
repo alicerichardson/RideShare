@@ -19,31 +19,17 @@ public class Ride implements Comparable<Ride>{
     public boolean food;
     public boolean money;
 
-<<<<<<< Updated upstream
-    public Ride(String to, String from, int time, Date date, int seats, boolean[] preferences){
-=======
     public Ride(String to, String from, String time, Date date, int seats, boolean[] preferences){
->>>>>>> Stashed changes
-
         this.to = to;
         this.from = from;
         this.time = time;
         this.date = date;
         this.seats = seats;
-<<<<<<< Updated upstream
         pets = preferences[0];
         luggage = preferences[1];
         smoking = preferences[2];
         food = preferences[3];
         money = preferences[4];
-=======
-        this.pets = pets;
-        this.luggage = luggage;
-        this.smoking = smoking;
-        this.food = food;
-        this.money = money;
-
->>>>>>> Stashed changes
     }
 
     public int compareTo(Ride ride){
