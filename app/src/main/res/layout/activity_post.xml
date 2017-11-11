@@ -39,15 +39,45 @@
             android:layout_height="50dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Number of seats: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_weight="1" />
+
+        <EditText
+            android:text="Number of seats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/seatsText"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <DatePicker
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/datePicker" />
 
-    <TimePicker
+    <!--<TimePicker-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/timePicker" />-->
+    <EditText
+        android:text="Time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker" />
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/time_text"
+        android:layout_weight="1" />
 
     <TextView
         android:text="What are you comfortable with?"

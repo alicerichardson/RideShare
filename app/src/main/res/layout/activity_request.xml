@@ -39,6 +39,16 @@
             android:layout_height="50dp" />
     </LinearLayout>
 
+    <DatePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker" />
+
+    <TimePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker" />
+
     <TextView
         android:text="What are you looking for?"
         android:layout_width="match_parent"
