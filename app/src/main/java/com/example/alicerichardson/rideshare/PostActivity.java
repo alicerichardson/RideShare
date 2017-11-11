@@ -38,5 +38,4 @@ public class PostActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
-
 }

@@ -6,40 +6,45 @@ import java.util.Date;
  * Created by alicerichardson on 11/11/17.
  */
 
-public class Request {
+public class Request implements Comparable<Request>{
 
-    public int to;
-    public int from;
-    public int time;
+    public String to;
+    public String from;
+    public String time;
     public Date date;
     public int seats;
     public boolean pets;
     public boolean luggage;
     public boolean smoking;
     public boolean food;
+    public boolean money;
 
-    public Request(int to, int from, int time, Date date, int seats, boolean pets, boolean luggage, boolean smoking, boolean food){
+    public Request(String to, String from, String time, Date date, int seats, boolean[] preferences){
+
         this.to = to;
         this.from = from;
         this.time = time;
         this.date = date;
         this.seats = seats;
-        this.pets = pets;
-        this.luggage = luggage;
-        this.smoking = smoking;
-        this.food = food;
+        pets = preferences[0];
+        luggage = preferences[1];
+        smoking = preferences[2];
+        food = preferences[3];
+        money = preferences[4];
+
     }
 
-    public int compare(Ride ride){
-        if(ride.date.compareTo(date) > 0){
+    public int compareTo(Request request){
+        if(request.date.compareTo(date) > 0){
             return 1;
         }
-        else if (ride.date.compareTo(date) < 0){
+        else if (request.date.compareTo(date) < 0){
             return -1;
         }
-        else {
+        else{
             return 0;
         }
+
     }
 
 

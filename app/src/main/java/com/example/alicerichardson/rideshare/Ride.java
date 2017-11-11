@@ -6,10 +6,10 @@ import java.util.Date;
  * Created by alicerichardson on 11/11/17.
  */
 
-public class Ride{
+public class Ride implements Comparable<Ride>{
 
-    public int to;
-    public int from;
+    public String to;
+    public String from;
     public int time;
     public Date date;
     public int seats;
@@ -17,22 +17,23 @@ public class Ride{
     public boolean luggage;
     public boolean smoking;
     public boolean food;
+    public boolean money;
 
-    public Ride(int to, int from, int time, Date date, int seats, boolean pets, boolean luggage, boolean smoking, boolean food){
+    public Ride(String to, String from, int time, Date date, int seats, boolean[] preferences){
 
         this.to = to;
         this.from = from;
         this.time = time;
         this.date = date;
         this.seats = seats;
-        this.pets = pets;
-        this.luggage = luggage;
-        this.smoking = smoking;
-        this.food = food;
-
+        pets = preferences[0];
+        luggage = preferences[1];
+        smoking = preferences[2];
+        food = preferences[3];
+        money = preferences[4];
     }
 
-    public int compare(Ride ride){
+    public int compareTo(Ride ride){
         if(ride.date.compareTo(date) > 0){
             return 1;
         }
@@ -44,28 +45,7 @@ public class Ride{
         }
     }
 
-//    DatePicker dp;
-//    Date date;
-//    protected void convertDatePicker() {
 
-//        date = (DatePicker) findViewById(R.id.datePicker);
-//        date = new Date();
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-//                String dateFormat = dateformat.format(new Date(date.getYear(), date.getMonth(), date.getDayOfMonth()));
-//                String nowDate = new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
-//                if (dateFormat.compareTo(nowDate) < 0) {
-//                    Toast.makeText(getApplicationContext(), "The date is too old", Toast.LENGTH_LONG);
-//                } else {
-//                    Intent i = new Intent(UserMenu.this, UserMenuTime.class);
-//                    i.putExtra("date", dateFormat);
-//                    startActivity(i);
-//                }
-//            }
-//        });
-//    }
 
 
 
