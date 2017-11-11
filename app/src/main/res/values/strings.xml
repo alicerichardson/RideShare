@@ -1,4 +1,20 @@
 <resources>
-    <string name="app_name">RideShare</string>
+    <string name="app_name">Five College Ride Share</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main">Welcome!</string>
+
+    <string-array name="locations_array">
+        <item>Amherst College</item>
+        <item>Hampshire College</item>
+        <item>Mount Holyoke College</item>
+        <item>Smith College</item>
+        <item>UMass</item>
+        <item>Bradley International Airport</item>
+        <item>Logan Airport</item>
+        <item>Boston</item>
+        <item>New York City</item>
+        <item>Other</item>
+
+    </string-array>
+
 </resources>
