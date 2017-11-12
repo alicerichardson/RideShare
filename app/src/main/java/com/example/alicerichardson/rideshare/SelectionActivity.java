@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import java.util.Queue;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
 /**
  * Created by alicerichardson on 11/11/17.
  */
@@ -32,7 +34,7 @@ public class SelectionActivity extends AppCompatActivity{
                     Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                     String emailRecipient = results.poll().email;
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, emailRecipient);
-                    //startActivity(Intent.createChooser(emailIntent, "Send your message in: "));
+                    startActivity(emailIntent);
                 }
             });
         }
