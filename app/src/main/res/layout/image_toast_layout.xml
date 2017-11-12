@@ -6,30 +6,29 @@
     android:id="@+id/relativeLayout1"
     android:background="@android:color/white">
 
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView1" android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:text="The card was lower!"
-        android:gravity="center"
-        android:textColor="@android:color/black">
-    </TextView>
+    <!--<TextView-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:id="@+id/textView1" android:layout_height="wrap_content"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:text="The card was lower!"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@android:color/black">-->
+    <!--</TextView>-->
 
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:layout_below="@+id/textView1"
-        android:layout_margin="5dip"
-        android:id="@+id/imageView1">
-    </ImageView>
+    <!--<ImageView-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_below="@+id/textView1"-->
+        <!--android:layout_margin="5dip"-->
+        <!--android:id="@+id/imageView1">-->
+    <!--</ImageView>-->
 
     <TextView
         android:id="@+id/textView2"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:text="You lose 0 points!"
+        android:text=""
         android:gravity="center"
-        android:layout_below="@+id/imageView1"
         android:textColor="@android:color/black">
     </TextView>
 

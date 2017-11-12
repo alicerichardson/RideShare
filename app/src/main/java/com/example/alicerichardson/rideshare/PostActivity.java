@@ -41,6 +41,7 @@ public class PostActivity extends AppCompatActivity {
     EditText timeText;
     EditText emailText;
     LayoutInflater inflater;
+    Toast toast;
     Toast successToast;
 
     @Override
@@ -70,6 +71,7 @@ public class PostActivity extends AppCompatActivity {
                 (ViewGroup) findViewById(R.id.relativeLayout1));
         toast = new Toast(this);
         toast.setView(view);
+
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +108,8 @@ public class PostActivity extends AppCompatActivity {
         // add ride to corresponding tree
         ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
         //show success toast
-
+        successToast = Toast.makeText(getApplicationContext(), "You requested ", Toast.LENGTH_LONG);
+        successToast.show();
         //return to home screen
     }
 
@@ -130,8 +133,15 @@ public class PostActivity extends AppCompatActivity {
         return new Date(date);
     }
 
+    private String getResultString()
+    {
+        String result = "You requested a ride...\nFrom: " + 
+    }
+
 //    private String getTime()
 //    {
 //        return timePicker.getHour() + ";" + timePicker.getMinute();
 //    }
 }
+
+
