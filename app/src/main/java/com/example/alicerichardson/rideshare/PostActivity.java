@@ -106,7 +106,7 @@ public class PostActivity extends AppCompatActivity {
         results = getSpinnerResultsArray();
         int numSeats = Integer.parseInt(seats.getText().toString());
         int time = Integer.parseInt(timeText.getText().toString());
-        String email = timeText.getText().toString();
+        String email = emailText.getText().toString();
         //create new ride and add to
         //if destination is not yet in map
         if (!ridesMap.containsKey(results[1])) {
@@ -116,8 +116,8 @@ public class PostActivity extends AppCompatActivity {
 //        //add ride to corresponding tree
         ridesMap.get(results[1]).add(new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
         //show success toast
-//        successToast = Toast.makeText(getApplicationContext(), getResultString(results, time, getDate(), numSeats, getCheckBoxResultsArray(), email), Toast.LENGTH_LONG);
-//        successToast.show();
+        successToast = Toast.makeText(getApplicationContext(), getResultString(results, time, getDate(), numSeats, getCheckBoxResultsArray(), email), Toast.LENGTH_LONG);
+        successToast.show();
         //return to home screen
     }
 
@@ -132,14 +132,15 @@ public class PostActivity extends AppCompatActivity {
         return results;
     }
 
-    private Date getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = dateFormat.format(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
-        return new Date(date);
+    private ADate getDate() {
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //String date = dateFormat.format(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
+        //return new Date(date);
+        return (new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
     }
 
-    private String getResultString(String[] locations, int time, Date date, int seats, boolean[] preferences, String email) {
-        String result = "You requested a ride...\nFrom: " + locations[0] + "\nTo: " + locations[1] + "\nFor " + seats + " seats\nYou said you are okay with ";
+    private String getResultString(String[] locations, int time, ADate date, int seats, boolean[] preferences, String email) {
+        String result = "You are offering a ride...\nFrom: " + locations[0] + "\nTo: " + locations[1] + "\nFor " + seats + " seats on "+date.toString()+"\nYou said you are okay with ";
         if (preferences[0])
             result += "pets ";
         if (preferences[1])
