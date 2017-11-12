@@ -31,7 +31,7 @@ public class RequestActivity extends AppCompatActivity {
     CheckBox smoking;
     CheckBox food;
     CheckBox money;
-    HashMap<String, TreeSet> ridesMap;
+    HashMap<String, TreeSet> requestsMap;
     DatePicker datePicker;
     //TimePicker timePicker;
     EditText timeText;
@@ -66,7 +66,7 @@ public class RequestActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
-    public void createNewRide()
+    public void createNewRequest()
     {
         //get info from spinners, date/time, check boxes
         results = getSpinnerResultsArray();
@@ -74,12 +74,12 @@ public class RequestActivity extends AppCompatActivity {
         int time = Integer.parseInt(timeText.getText().toString());
         //create new ride and add to
         // if destination is not yet in map
-        if (ridesMap.containsKey(results[1])) {
+        if (requestsMap.containsKey(results[1])) {
             // add it to map with a new (empty) tree
-            ridesMap.put(results[1], new TreeSet<Ride>());
+            requestsMap.put(results[1], new TreeSet<Request>());
         }
         // add ride to corresponding tree
-        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
+        requestsMap.get(results[1]).add( new Request(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
         //show success toast
 
         //return to home screen
@@ -103,13 +103,6 @@ public class RequestActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
         return new Date(date);
-    }
-
-    public void createNewRequest()
-    {
-
-
-
     }
 
 }

@@ -2,7 +2,9 @@ package com.example.alicerichardson.rideshare;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -34,8 +37,11 @@ public class PostActivity extends AppCompatActivity {
     CheckBox money;
     HashMap<String, TreeSet> ridesMap;
     DatePicker datePicker;
-    TimePicker timePicker;
+    //TimePicker timePicker;
     EditText timeText;
+    EditText emailText;
+    LayoutInflater inflater;
+    Toast successToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +63,13 @@ public class PostActivity extends AppCompatActivity {
         datePicker = (DatePicker) findViewById(R.id.datePicker);
         //timePicker = (TimePicker) findViewById(R.id.timePicker);
         timeText = (EditText) findViewById(R.id.time_text);
+        emailText = (EditText) findViewById(R.id.email_text);
 
+        inflater= getLayoutInflater();
+        View view = inflater.inflate(R.layout.image_toast_layout,
+                (ViewGroup) findViewById(R.id.relativeLayout1));
+        toast = new Toast(this);
+        toast.setView(view);
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +96,7 @@ public class PostActivity extends AppCompatActivity {
         results = getSpinnerResultsArray();
         int numSeats = Integer.parseInt(seats.getText().toString());
         int time = Integer.parseInt(timeText.getText().toString());
+        String email = timeText.getText().toString();
         //create new ride and add to
         // if destination is not yet in map
         if (ridesMap.containsKey(results[1])) {
@@ -91,7 +104,7 @@ public class PostActivity extends AppCompatActivity {
             ridesMap.put(results[1], new TreeSet<Ride>());
         }
         // add ride to corresponding tree
-        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
+        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
         //show success toast
 
         //return to home screen

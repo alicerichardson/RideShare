@@ -10,7 +10,7 @@ public class Request implements Comparable<Request>{
 
     public String to;
     public String from;
-    public String time;
+    public int time;
     public Date date;
     public int seats;
     public boolean pets;
@@ -19,7 +19,7 @@ public class Request implements Comparable<Request>{
     public boolean food;
     public boolean money;
 
-    public Request(String to, String from, String time, Date date, int seats, boolean[] preferences){
+    public Request(String to, String from, int time, Date date, int seats, boolean[] preferences){
 
         this.to = to;
         this.from = from;

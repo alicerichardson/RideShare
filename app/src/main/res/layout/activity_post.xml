@@ -132,6 +132,27 @@
             android:id="@+id/moneyBox" />
     </GridLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Email: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_weight="1" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/email_text"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <Button
         android:text="Go!"
         android:layout_width="match_parent"
