@@ -21,7 +21,6 @@ public class Ride implements Comparable<Ride>{
     public String email;
 
     public Ride(String to, String from, int time, ADate date, int seats, boolean[] preferences, String email){
-
         this.to = to;
         this.from = from;
         this.time = time;
@@ -46,5 +45,9 @@ public class Ride implements Comparable<Ride>{
             return 0;
         }
     }
+
+
+
+
 
 }

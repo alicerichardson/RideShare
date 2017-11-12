@@ -3,7 +3,9 @@ package com.example.alicerichardson.rideshare;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -40,14 +43,13 @@ public class PostActivity extends AppCompatActivity {
     CheckBox money;
     HashMap<String, TreeSet> ridesMap;
     DatePicker datePicker;
-    TimePicker timePicker;
+    //TimePicker timePicker;
     EditText timeText;
     EditText emailText;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    LayoutInflater inflater;
+    Toast toast;
+    Toast successToast;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class PostActivity extends AppCompatActivity {
 
         populateSpinner(R.id.to_spinner);
         populateSpinner(R.id.from_spinner);
+        ridesMap = new HashMap<String, TreeSet>();
 
         fromSpinner = (Spinner) findViewById(R.id.from_spinner);
         toSpinner = (Spinner) findViewById(R.id.to_spinner);
@@ -71,6 +74,12 @@ public class PostActivity extends AppCompatActivity {
         timeText = (EditText) findViewById(R.id.time_text);
         emailText = (EditText) findViewById(R.id.email_text);
 
+//        inflater= getLayoutInflater();
+//        View view = inflater.inflate(R.layout.image_toast_layout,
+//                (ViewGroup) findViewById(R.id.relativeLayout1));
+        toast = new Toast(this);
+//        toast.setView(view);
+
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,9 +88,7 @@ public class PostActivity extends AppCompatActivity {
                 createNewRide();
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     private void populateSpinner(int newSpinID) {
@@ -100,17 +107,17 @@ public class PostActivity extends AppCompatActivity {
         int numSeats = Integer.parseInt(seats.getText().toString());
         int time = Integer.parseInt(timeText.getText().toString());
         String email = emailText.getText().toString();
-        ADate date = new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         //create new ride and add to
-        // if destination is not yet in map
-        if (ridesMap.containsKey(results[1])) {
+        //if destination is not yet in map
+        if (!ridesMap.containsKey(results[1])) {
             // add it to map with a new (empty) tree
             ridesMap.put(results[1], new TreeSet<Ride>());
         }
-        // add ride to corresponding tree
-        ridesMap.get(results[1]).add(new Ride(results[1], results[0], time, date, numSeats, getCheckBoxResultsArray(), email));
+//        //add ride to corresponding tree
+        ridesMap.get(results[1]).add(new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
         //show success toast
-
+        successToast = Toast.makeText(getApplicationContext(), getResultString(results, time, getDate(), numSeats, getCheckBoxResultsArray(), email), Toast.LENGTH_LONG);
+        successToast.show();
         //return to home screen
     }
 
@@ -125,50 +132,36 @@ public class PostActivity extends AppCompatActivity {
         return results;
     }
 
-//    private ADate getDate() {
-//        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        //String date = dateFormat.format(new ADate());
-//        return new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-//    }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Post Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
+    private ADate getDate() {
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //String date = dateFormat.format(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
+        //return new Date(date);
+        return (new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    private String getResultString(String[] locations, int time, ADate date, int seats, boolean[] preferences, String email) {
+        String result = "You are offering a ride...\nFrom: " + locations[0] + "\nTo: " + locations[1] + "\nFor " + seats + " seats on "+date.toString()+"\nYou said you are okay with ";
+        if (preferences[0])
+            result += "pets ";
+        if (preferences[1])
+            result += "luggage ";
+        if (preferences[2])
+            result += "smoking ";
+        if (preferences[3])
+            result += "food ";
+        if (preferences[4])
+            result += "and you would like payment in return";
+        result += "You will be contacted at " + email + " if any riders are a match.";
+        return result;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
+
 
 //    private String getTime()
 //    {
 //        return timePicker.getHour() + ";" + timePicker.getMinute();
 //    }
 }
+
+
