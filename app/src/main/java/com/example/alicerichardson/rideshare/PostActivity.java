@@ -14,7 +14,6 @@ import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Date;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -56,7 +55,7 @@ public class PostActivity extends AppCompatActivity {
         food = (CheckBox) findViewById(R.id.foodBox);
         money = (CheckBox) findViewById(R.id.moneyBox);
         datePicker = (DatePicker) findViewById(R.id.datePicker);
-        timePicker = (TimePicker) findViewById(R.id.timePicker);
+        //timePicker = (TimePicker) findViewById(R.id.timePicker);
         timeText = (EditText) findViewById(R.id.time_text);
 
 
@@ -84,7 +83,7 @@ public class PostActivity extends AppCompatActivity {
         //get info from spinners, date/time, check boxes
         results = getSpinnerResultsArray();
         int numSeats = Integer.parseInt(seats.getText().toString());
-        String time = timeText.getText().toString();
+        int time = Integer.parseInt(timeText.getText().toString());
         //create new ride and add to
         // if destination is not yet in map
         if (ridesMap.containsKey(results[1])) {
