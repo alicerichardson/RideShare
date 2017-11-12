@@ -46,17 +46,10 @@ public class PostActivity extends AppCompatActivity {
     //TimePicker timePicker;
     EditText timeText;
     EditText emailText;
-<<<<<<< HEAD
     LayoutInflater inflater;
     Toast toast;
     Toast successToast;
-=======
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
->>>>>>> origin/master
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +58,7 @@ public class PostActivity extends AppCompatActivity {
 
         populateSpinner(R.id.to_spinner);
         populateSpinner(R.id.from_spinner);
+        ridesMap = new HashMap<String, TreeSet>();
 
         fromSpinner = (Spinner) findViewById(R.id.from_spinner);
         toSpinner = (Spinner) findViewById(R.id.to_spinner);
@@ -79,15 +73,12 @@ public class PostActivity extends AppCompatActivity {
         //timePicker = (TimePicker) findViewById(R.id.timePicker);
         timeText = (EditText) findViewById(R.id.time_text);
         emailText = (EditText) findViewById(R.id.email_text);
-<<<<<<< HEAD
 
-        inflater= getLayoutInflater();
-        View view = inflater.inflate(R.layout.image_toast_layout,
-                (ViewGroup) findViewById(R.id.relativeLayout1));
+//        inflater= getLayoutInflater();
+//        View view = inflater.inflate(R.layout.image_toast_layout,
+//                (ViewGroup) findViewById(R.id.relativeLayout1));
         toast = new Toast(this);
-        toast.setView(view);
-=======
->>>>>>> origin/master
+//        toast.setView(view);
 
 
         goButton.setOnClickListener(new View.OnClickListener() {
@@ -97,9 +88,7 @@ public class PostActivity extends AppCompatActivity {
                 createNewRide();
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     private void populateSpinner(int newSpinID) {
@@ -119,20 +108,16 @@ public class PostActivity extends AppCompatActivity {
         int time = Integer.parseInt(timeText.getText().toString());
         String email = timeText.getText().toString();
         //create new ride and add to
-        // if destination is not yet in map
-        if (ridesMap.containsKey(results[1])) {
+        //if destination is not yet in map
+        if (!ridesMap.containsKey(results[1])) {
             // add it to map with a new (empty) tree
             ridesMap.put(results[1], new TreeSet<Ride>());
         }
-        // add ride to corresponding tree
-<<<<<<< HEAD
-        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
-=======
+//        //add ride to corresponding tree
         ridesMap.get(results[1]).add(new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
->>>>>>> origin/master
         //show success toast
-        successToast = Toast.makeText(getApplicationContext(), "You requested ", Toast.LENGTH_LONG);
-        successToast.show();
+//        successToast = Toast.makeText(getApplicationContext(), getResultString(results, time, getDate(), numSeats, getCheckBoxResultsArray(), email), Toast.LENGTH_LONG);
+//        successToast.show();
         //return to home screen
     }
 
@@ -153,47 +138,24 @@ public class PostActivity extends AppCompatActivity {
         return new Date(date);
     }
 
-<<<<<<< HEAD
-    private String getResultString()
-    {
-        String result = "You requested a ride...\nFrom: " + 
-=======
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Post Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
+    private String getResultString(String[] locations, int time, Date date, int seats, boolean[] preferences, String email) {
+        String result = "You requested a ride...\nFrom: " + locations[0] + "\nTo: " + locations[1] + "\nFor " + seats + " seats\nYou said you are okay with ";
+        if (preferences[0])
+            result += "pets ";
+        if (preferences[1])
+            result += "luggage ";
+        if (preferences[2])
+            result += "smoking ";
+        if (preferences[3])
+            result += "food ";
+        if (preferences[4])
+            result += "and you would like payment in return";
+        result += "You will be contacted at " + email + " if any riders are a match.";
+        return result;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
->>>>>>> origin/master
-    }
 
 //    private String getTime()
 //    {

@@ -76,20 +76,12 @@ public class RequestActivity extends AppCompatActivity {
         String email = emailText.getText().toString();
         //create new ride and add to
         // if destination is not yet in map
-<<<<<<< HEAD
-        if (requestsMap.containsKey(results[1])) {
-=======
-        if (!ridesMap.containsKey(results[1])) {
->>>>>>> origin/master
+        if (!requestsMap.containsKey(results[1])) {
             // add it to map with a new (empty) tree
             requestsMap.put(results[1], new TreeSet<Request>());
         }
         // add ride to corresponding tree
-<<<<<<< HEAD
         requestsMap.get(results[1]).add( new Request(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
-=======
-        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
->>>>>>> origin/master
         //show success toast
 
         //return to home screen
