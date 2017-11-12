@@ -99,6 +99,8 @@ public class PostActivity extends AppCompatActivity {
         results = getSpinnerResultsArray();
         int numSeats = Integer.parseInt(seats.getText().toString());
         int time = Integer.parseInt(timeText.getText().toString());
+        String email = emailText.getText().toString();
+        ADate date = new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         //create new ride and add to
         // if destination is not yet in map
         if (ridesMap.containsKey(results[1])) {
@@ -106,7 +108,7 @@ public class PostActivity extends AppCompatActivity {
             ridesMap.put(results[1], new TreeSet<Ride>());
         }
         // add ride to corresponding tree
-        ridesMap.get(results[1]).add(new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
+        ridesMap.get(results[1]).add(new Ride(results[1], results[0], time, date, numSeats, getCheckBoxResultsArray(), email));
         //show success toast
 
         //return to home screen
@@ -123,11 +125,11 @@ public class PostActivity extends AppCompatActivity {
         return results;
     }
 
-    private Date getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = dateFormat.format(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
-        return new Date(date);
-    }
+//    private ADate getDate() {
+//        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        //String date = dateFormat.format(new ADate());
+//        return new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+//    }
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

@@ -47,6 +47,10 @@ public class RequestActivity extends AppCompatActivity {
         fromSpinner = (Spinner) findViewById(R.id.from_spinner);
         toSpinner = (Spinner) findViewById(R.id.to_spinner);
         Button goButton = (Button) findViewById(R.id.go_button);
+        seats = (EditText) findViewById(R.id.seatsText);
+        pets = (CheckBox) findViewById(R.id.petBox);
+        luggage = (CheckBox) findViewById(R.id.luggageBox);
+
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +78,7 @@ public class RequestActivity extends AppCompatActivity {
         int numSeats = Integer.parseInt(seats.getText().toString());
         int time = Integer.parseInt(timeText.getText().toString());
         String email = emailText.getText().toString();
+        ADate date = new ADate(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         //create new ride and add to
         // if destination is not yet in map
         if (!ridesMap.containsKey(results[1])) {
@@ -81,7 +86,7 @@ public class RequestActivity extends AppCompatActivity {
             ridesMap.put(results[1], new TreeSet<Ride>());
         }
         // add ride to corresponding tree
-        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
+        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, date, numSeats, getCheckBoxResultsArray(), email));
         //show success toast
 
         //return to home screen
