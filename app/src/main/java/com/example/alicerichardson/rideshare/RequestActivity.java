@@ -35,6 +35,7 @@ public class RequestActivity extends AppCompatActivity {
     DatePicker datePicker;
     //TimePicker timePicker;
     EditText timeText;
+    EditText emailText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +73,23 @@ public class RequestActivity extends AppCompatActivity {
         results = getSpinnerResultsArray();
         int numSeats = Integer.parseInt(seats.getText().toString());
         int time = Integer.parseInt(timeText.getText().toString());
+        String email = emailText.getText().toString();
         //create new ride and add to
         // if destination is not yet in map
+<<<<<<< HEAD
         if (requestsMap.containsKey(results[1])) {
+=======
+        if (!ridesMap.containsKey(results[1])) {
+>>>>>>> origin/master
             // add it to map with a new (empty) tree
             requestsMap.put(results[1], new TreeSet<Request>());
         }
         // add ride to corresponding tree
+<<<<<<< HEAD
         requestsMap.get(results[1]).add( new Request(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray()));
+=======
+        ridesMap.get(results[1]).add( new Ride(results[1], results[0], time, getDate(), numSeats, getCheckBoxResultsArray(), email));
+>>>>>>> origin/master
         //show success toast
 
         //return to home screen

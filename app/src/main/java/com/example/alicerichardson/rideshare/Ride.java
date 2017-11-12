@@ -19,8 +19,14 @@ public class Ride implements Comparable<Ride>{
     public boolean food;
     public boolean money;
     public String email;
+<<<<<<< HEAD
 
     public Ride(String to, String from, int time, Date date, int seats, boolean[] preferences, String email){
+=======
+
+    public Ride(String to, String from, int time, Date date, int seats, boolean[] preferences, String email){
+
+>>>>>>> origin/master
         this.to = to;
         this.from = from;
         this.time = time;
